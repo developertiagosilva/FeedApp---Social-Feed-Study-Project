@@ -1,0 +1,85 @@
+{% extends 'posts/base.html' %}
+
+{% block content %}
+
+<!-- Caixas de login rápido / criar post -->
+<div class="bg-white rounded-2xl p-4 shadow-sm space-y-3">
+  <div class="flex items-center justify-between text-xs text-gray-500 font-medium">
+    <a href="{% url 'post_create' %}" class="text-blue-600 font-semibold hover:underline">
+      <i class="fa-solid fa-plus mr-1"></i> Criar novo post
+    </a>
+    <div class="flex items-center gap-2">
+      <span>Entrar com:</span>
+      <button class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-gray-200">
+        <i class="fa-brands fa-google text-xs"></i>
+      </button>
+      <button class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-gray-200">
+        <i class="fa-brands fa-apple text-xs"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold flex-shrink-0">
+      <i class="fa-solid fa-user"></i>
+    </div>
+    <a href="{% url 'post_create' %}" class="w-full bg-gray-100 hover:bg-gray-200 transition text-gray-400 rounded-full py-2.5 px-4 text-sm">
+      O que você está pensando?...
+    </a>
+  </div>
+</div>
+
+<!-- Lista de Posts -->
+<div class="space-y-3">
+  {% for post in posts %}
+    <div class="bg-white rounded-2xl p-4 shadow-sm space-y-3 relative group">
+      <!-- Cabeçalho do Post -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-500 flex items-center justify-center text-white font-bold">
+            {{ post.titulo|slice:":1"|upper }}
+          </div>
+          <div>
+            <a href="{% url 'post_detail' post.pk %}" class="font-bold text-gray-900 text-sm hover:underline block">
+              {{ post.titulo }}
+            </a>
+            <span class="text-xs text-gray-400">{{ post.criado_em|date:"d/m/Y \à\s H:i" }}</span>
+          </div>
+        </div>
+
+        <!-- Menu de ações rápidas -->
+        <div class="flex gap-2 text-gray-400 text-xs">
+          <a href="{% url 'post_update' post.pk %}" class="hover:text-blue-500 transition"><i class="fa-solid fa-pen"></i></a>
+          <a href="{% url 'post_delete' post.pk %}" class="hover:text-red-500 transition"><i class="fa-solid fa-trash"></i></a>
+        </div>
+      </div>
+
+      <!-- Conteúdo -->
+      <p class="text-sm text-gray-700 leading-relaxed">
+        {{ post.conteudo }}
+      </p>
+
+      <!-- Botões de Reação estilo Rede Social -->
+      <div class="flex items-center gap-2 pt-1 border-t border-gray-50">
+        <button class="flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 transition px-3 py-1 rounded-full text-xs font-semibold text-gray-600">
+          🔥 <span>8</span>
+        </button>
+        <button class="flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 transition px-3 py-1 rounded-full text-xs font-semibold text-gray-600">
+          ❤️ <span>10</span>
+        </button>
+        <button class="flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 transition px-3 py-1.5 rounded-full text-xs text-gray-500">
+          <i class="fa-regular fa-face-smile"></i>
+        </button>
+        <a href="{% url 'post_detail' post.pk %}" class="flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 transition px-3 py-1.5 rounded-full text-xs text-gray-600 font-medium ml-auto">
+          <i class="fa-regular fa-comment"></i> Responder
+        </a>
+      </div>
+    </div>
+  {% empty %}
+    <div class="bg-white rounded-2xl p-6 text-center text-gray-400 text-sm shadow-sm">
+      Nenhum post publicado ainda. Seja o primeiro a compartilhar algo!
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'posts/base.html' %}
+
+{% block content %}
+<div class="bg-white rounded-2xl p-5 shadow-sm space-y-4">
+  <div class="flex items-center justify-between border-b pb-3">
+    <h1 class="text-base font-bold text-gray-800">
+      {% if object %}Editar Post{% else %}Criar Post{% endif %}
+    </h1>
+    <a href="{% url 'post_list' %}" class="text-gray-400 hover:text-gray-600 text-sm">
+      <i class="fa-solid fa-xmark"></i>
+    </a>
+  </div>
+
+  <form method="post" class="space-y-4">
+    {% csrf_token %}
+    <div>
+      <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Título</label>
+      <input type="text" name="titulo" value="{{ form.titulo.value|default:'' }}" 
+             class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+    </div>
+
+    <div>
+      <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Conteúdo</label>
+      <textarea name="conteudo" rows="4" 
+                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>{{ form.conteudo.value|default:'' }}</textarea>
+    </div>
+
+    <div class="flex gap-2 justify-end pt-2">
+      <a href="{% url 'post_list' %}" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-xl text-xs font-semibold text-gray-600 transition">
+        Cancelar
+      </a>
+      <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-xl text-xs font-semibold text-white transition">
+        Salvar
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
