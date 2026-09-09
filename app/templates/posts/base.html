@@ -1,17 +1,48 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feed</title>
-  <!-- Tailwind CSS via CDN para desenvolvimento rápido -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedApp</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Bloco para CSS específico das páginas filhas -->
+    {% block extra_head %}{% endblock %}
+    
 </head>
-<body class="bg-gray-100 min-h-screen text-gray-800 flex justify-center py-6 px-4">
-  <div class="w-full max-w-lg space-y-4">
-    {% block content %}
-    {% endblock %}
-  </div>
+<body class="bg-[#0d1117] text-[#f0f6fc] min-h-screen font-sans antialiased">
+
+    <!-- Header do App -->
+    <header class="bg-[#161b22] border-b border-[#30363d] sticky top-0 z-50">
+        <div class="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="{% url 'post_list' %}" class="text-xl font-bold tracking-tight text-[#f0f6fc] flex items-center gap-2">
+                <span class="text-[#58a6ff]">⚡</span> FeedApp
+            </a>
+            
+            {% if user.is_authenticated %}
+                <div class="flex items-center gap-4">
+                    <span class="text-xs text-gray-400">
+                        Olá, <strong class="text-[#f0f6fc] font-semibold">{{ user.username }}</strong>
+                    </span>
+                    
+                    <!-- Botão de Sair com Ícone -->
+                    <a href="{% url 'logout' %}" class="flex items-center gap-1.5 bg-[#21262d] hover:bg-[#30363d] text-[#ff7b72] border border-[#30363d] px-3 py-1.5 rounded-lg text-xs font-semibold transition">
+                        <i class="fa-solid fa-right-from-bracket"></i> Sair
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="max-w-2xl mx-auto px-4 py-6">
+        {% block content %}
+        {% endblock %}
+    </main>
+
 </body>
 </html>

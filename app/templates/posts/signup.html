@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app/css/signup.css' %}">
+    <title>Criar Conta - FeedApp</title>
+</head>
+<body>
+    <div class="login">
+        <h1>Criar Conta</h1>
+
+        <!-- Exibe erros do formulário -->
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <p class="error-msg">{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Usuário" required>
+            <input type="password" name="password1" placeholder="Senha" required>
+            <input type="password" name="password2" placeholder="Confirme a Senha" required>
+            
+            <button type="submit" class="btn btn-primary btn-block btn-large">Cadastrar e Entrar</button>
+        </form>
+
+        <p class="login-footer">
+            <a href="{% url 'login' %}">Já tem uma conta? Faça login</a>
+        </p>
+    </div>
+</body>
+</html>

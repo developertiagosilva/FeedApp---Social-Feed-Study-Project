@@ -1,82 +1,84 @@
 {% extends 'posts/base.html' %}
 
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'app/css/post_list.css' %}">
+{% endblock %}
+
 {% block content %}
 
-<!-- Caixas de login rápido / criar post -->
-<div class="bg-white rounded-2xl p-4 shadow-sm space-y-3">
-  <div class="flex items-center justify-between text-xs text-gray-500 font-medium">
-    <a href="{% url 'post_create' %}" class="text-blue-600 font-semibold hover:underline">
-      <i class="fa-solid fa-plus mr-1"></i> Criar novo post
+<!-- Caixa de criar post -->
+<div class="bg-[#161b22] border border-[#30363d] rounded-xl p-4 space-y-3 shadow-lg">
+  <div class="flex items-center justify-between text-xs text-gray-400 font-medium">
+    <a href="{% url 'post_create' %}" class="text-[#58a6ff] font-semibold hover:underline flex items-center gap-1">
+      <i class="fa-solid fa-plus"></i> Criar novo post
     </a>
-    <div class="flex items-center gap-2">
-      <span>Entrar com:</span>
-      <button class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-gray-200">
-        <i class="fa-brands fa-google text-xs"></i>
-      </button>
-      <button class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-gray-200">
-        <i class="fa-brands fa-apple text-xs"></i>
-      </button>
-    </div>
   </div>
 
   <div class="flex items-center gap-3">
-    <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold flex-shrink-0">
+    <div class="w-10 h-10 rounded-full bg-[#238636] flex items-center justify-center text-white font-bold flex-shrink-0">
       <i class="fa-solid fa-user"></i>
     </div>
-    <a href="{% url 'post_create' %}" class="w-full bg-gray-100 hover:bg-gray-200 transition text-gray-400 rounded-full py-2.5 px-4 text-sm">
+    <a href="{% url 'post_create' %}" class="w-full bg-[#0d1117] border border-[#30363d] hover:border-[#58a6ff] transition text-gray-400 rounded-lg py-2.5 px-4 text-sm">
       O que você está pensando?...
     </a>
   </div>
 </div>
 
 <!-- Lista de Posts -->
-<div class="space-y-3">
+<div class="space-y-4 mt-4">
   {% for post in posts %}
-    <div class="bg-white rounded-2xl p-4 shadow-sm space-y-3 relative group">
+    <div class="bg-[#161b22] border border-[#30363d] rounded-xl p-5 space-y-3 relative group shadow-md hover:border-[#484f58] transition">
+      
       <!-- Cabeçalho do Post -->
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-500 flex items-center justify-center text-white font-bold">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold shadow-sm">
             {{ post.titulo|slice:":1"|upper }}
           </div>
           <div>
-            <a href="{% url 'post_detail' post.pk %}" class="font-bold text-gray-900 text-sm hover:underline block">
+            <a href="{% url 'post_detail' post.pk %}" class="font-semibold text-[#f0f6fc] text-base hover:text-[#58a6ff] transition block">
               {{ post.titulo }}
             </a>
             <span class="text-xs text-gray-400">{{ post.criado_em|date:"d/m/Y \à\s H:i" }}</span>
           </div>
         </div>
 
-        <!-- Menu de ações rápidas -->
-        <div class="flex gap-2 text-gray-400 text-xs">
-          <a href="{% url 'post_update' post.pk %}" class="hover:text-blue-500 transition"><i class="fa-solid fa-pen"></i></a>
-          <a href="{% url 'post_delete' post.pk %}" class="hover:text-red-500 transition"><i class="fa-solid fa-trash"></i></a>
+        <!-- Menu de Ações (Editar/Deletar) -->
+        <div class="flex gap-3 text-gray-400 text-xs">
+          <a href="{% url 'post_update' post.pk %}" class="hover:text-[#58a6ff] transition title="Editar""><i class="fa-solid fa-pen"></i></a>
+          <a href="{% url 'post_delete' post.pk %}" class="hover:text-[#ff7b72] transition" title="Excluir"><i class="fa-solid fa-trash"></i></a>
         </div>
       </div>
 
-      <!-- Conteúdo -->
-      <p class="text-sm text-gray-700 leading-relaxed">
+      <!-- Conteúdo do Post -->
+      <p class="text-sm text-gray-300 leading-relaxed pt-1">
         {{ post.conteudo }}
       </p>
 
-      <!-- Botões de Reação estilo Rede Social -->
-      <div class="flex items-center gap-2 pt-1 border-t border-gray-50">
-        <button class="flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 transition px-3 py-1 rounded-full text-xs font-semibold text-gray-600">
-          🔥 <span>8</span>
-        </button>
-        <button class="flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 transition px-3 py-1 rounded-full text-xs font-semibold text-gray-600">
-          ❤️ <span>10</span>
-        </button>
-        <button class="flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 transition px-3 py-1.5 rounded-full text-xs text-gray-500">
-          <i class="fa-regular fa-face-smile"></i>
-        </button>
-        <a href="{% url 'post_detail' post.pk %}" class="flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 transition px-3 py-1.5 rounded-full text-xs text-gray-600 font-medium ml-auto">
+      <!-- Botões de Reação (Fogo e Coração) -->
+      <div class="flex items-center gap-2 pt-3 border-t border-[#30363d]">
+        
+        <!-- Botão Fogo -->
+        <a href="{% url 'curtir_post' post.pk 'fogo' %}" class="flex items-center gap-1.5 bg-[#0d1117] border border-[#30363d] hover:border-[#f97316] hover:bg-[#1f1915] transition px-3 py-1.5 rounded-full text-xs font-semibold text-gray-200">
+          🔥 <span class="text-[#f97316] font-bold">{{ post.total_fogo }}</span>
+        </a>
+
+        <!-- Botão Coração -->
+        <a href="{% url 'curtir_post' post.pk 'coracao' %}" class="flex items-center gap-1.5 bg-[#0d1117] border border-[#30363d] hover:border-[#f43f5e] hover:bg-[#201519] transition px-3 py-1.5 rounded-full text-xs font-semibold text-gray-200">
+          ❤️ <span class="text-[#f43f5e] font-bold">{{ post.total_coracao }}</span>
+        </a>
+
+        <!-- Botão Responder / Ver Detalhes -->
+        <a href="{% url 'post_detail' post.pk %}" class="flex items-center gap-1.5 bg-[#0d1117] border border-[#30363d] hover:border-[#58a6ff] transition px-3.5 py-1.5 rounded-full text-xs text-gray-300 font-medium ml-auto">
           <i class="fa-regular fa-comment"></i> Responder
         </a>
       </div>
+
     </div>
   {% empty %}
-    <div class="bg-white rounded-2xl p-6 text-center text-gray-400 text-sm shadow-sm">
+    <div class="bg-[#161b22] border border-[#30363d] rounded-xl p-8 text-center text-gray-400 text-sm shadow-md">
       Nenhum post publicado ainda. Seja o primeiro a compartilhar algo!
     </div>
   {% endfor %}

@@ -1,0 +1,173 @@
+/* Importa as mesmas regras do login */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* body {
+    background-color: #0d1117;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+} */
+
+
+
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Open Sans", sans-serif;
+  background: #092756;
+  background:
+    -moz-radial-gradient(
+      0% 100%,
+      ellipse cover,
+      rgba(104, 128, 138, 0.4) 10%,
+      rgba(138, 114, 76, 0) 40%
+    ),
+    -moz-linear-gradient(
+        top,
+        rgba(57, 173, 219, 0.25) 0%,
+        rgba(42, 60, 87, 0.4) 100%
+      ),
+    -moz-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+  background:
+    -webkit-radial-gradient(
+      0% 100%,
+      ellipse cover,
+      rgba(104, 128, 138, 0.4) 10%,
+      rgba(138, 114, 76, 0) 40%
+    ),
+    -webkit-linear-gradient(
+        top,
+        rgba(57, 173, 219, 0.25) 0%,
+        rgba(42, 60, 87, 0.4) 100%
+      ),
+    -webkit-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+  background:
+    -o-radial-gradient(
+      0% 100%,
+      ellipse cover,
+      rgba(104, 128, 138, 0.4) 10%,
+      rgba(138, 114, 76, 0) 40%
+    ),
+    -o-linear-gradient(
+        top,
+        rgba(57, 173, 219, 0.25) 0%,
+        rgba(42, 60, 87, 0.4) 100%
+      ),
+    -o-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+  background:
+    -ms-radial-gradient(
+      0% 100%,
+      ellipse cover,
+      rgba(104, 128, 138, 0.4) 10%,
+      rgba(138, 114, 76, 0) 40%
+    ),
+    -ms-linear-gradient(
+        top,
+        rgba(57, 173, 219, 0.25) 0%,
+        rgba(42, 60, 87, 0.4) 100%
+      ),
+    -ms-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+  background:
+    -webkit-radial-gradient(
+      0% 100%,
+      ellipse cover,
+      rgba(104, 128, 138, 0.4) 10%,
+      rgba(138, 114, 76, 0) 40%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(57, 173, 219, 0.25) 0%,
+      rgba(42, 60, 87, 0.4) 100%
+    ),
+    linear-gradient(135deg, #670d10 0%, #092756 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+}
+
+.login {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.login h1 {
+    color: #f0f6fc;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.login input[type="text"],
+.login input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #f0f6fc;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.login input[type="text"]:focus,
+.login input[type="password"]:focus {
+    border-color: #58a6ff;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: #238636;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #2ea043;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-footer a {
+    color: #58a6ff;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+.error-msg {
+    color: #ff7b72;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 12px;
+}

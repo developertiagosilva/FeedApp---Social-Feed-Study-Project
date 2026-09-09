@@ -11,12 +11,25 @@
 <body>
     <div class="login">
         <h1>Login</h1>
+
+        <!-- Exibe mensagens de erro (ex: senha incorreta) -->
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: #ff6b6b; text-align: center; font-size: 13px;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
         <form method="post">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Usernome">
-            <input type="password" name="password" placeholder="Password" required="required">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
             <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
         </form>
+
+        <!-- NOVO: Link redirecionando para a rota 'signup' -->
+        <p style="text-align: center; margin-top: 15px;">
+            <a href="{% url 'signup' %}" style="color: #fff; text-decoration: none;">Não tem uma conta? Cadastre-se</a>
+        </p>
     </div>
 </body>
 </html>
